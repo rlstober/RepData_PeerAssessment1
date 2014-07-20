@@ -113,6 +113,7 @@ library("sqldf", lib.loc="~/R/win-library/3.1")
 
 ## recode the dataset
 ##The strategy to remove NA steps is to replace NA with the mean of interval per day from above
+
 ## merge datsets on interval
 newAMdata<-merge(AMdata,stepInterval, by="interval")
 ## create clean data set 
