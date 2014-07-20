@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output:
+  html_document:
+    keep_md: true
+---
 ##Introduction
 
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the “quantified self” movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
@@ -103,6 +108,11 @@ print(paste("The number of incomplete cases in the data set is", notCC, ",while 
 
 Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
+```{r echo=TRUE}
+print("The strategy to remove NA steps is to replace NA with the mean of interval per day from above")
+```
+
+
 Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
@@ -113,6 +123,7 @@ library("sqldf", lib.loc="~/R/win-library/3.1")
 
 ## recode the dataset
 ##The strategy to remove NA steps is to replace NA with the mean of interval per day from above
+
 ## merge datsets on interval
 newAMdata<-merge(AMdata,stepInterval, by="interval")
 ## create clean data set 

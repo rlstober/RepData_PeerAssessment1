@@ -1,6 +1,4 @@
 # Reproducible Research: Peer Assessment 1
-
-# Reproducible Research: Peer Assessment 1
 ##Introduction
 
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the quantified self movement  a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
@@ -100,7 +98,7 @@ Which 5-minute interval, on average across all the days in the dataset, contains
 
 
 ```r
-## get aver of steps by date
+## get average of steps by date
 stepInterval<-aggregate(steps~interval, AMdata, mean)
 
 
@@ -148,6 +146,16 @@ print(paste("The number of incomplete cases in the data set is", notCC, ",while 
 
 Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
+
+```r
+print("The strategy to remove NA steps is to replace NA with the mean of interval per day from above")
+```
+
+```
+## [1] "The strategy to remove NA steps is to replace NA with the mean of interval per day from above"
+```
+
+
 Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
@@ -168,7 +176,8 @@ library("sqldf", lib.loc="~/R/win-library/3.1")
 
 ```r
 ## recode the dataset
-##for NA steps use mean of interval from above
+##The strategy to remove NA steps is to replace NA with the mean of interval per day from above
+
 ## merge datsets on interval
 newAMdata<-merge(AMdata,stepInterval, by="interval")
 ## create clean data set 
@@ -199,7 +208,7 @@ print(newsubtitle<-paste("Mean Steps = ", newstepDateMean, "and Median Steps = "
 hist(stepDate$steps, main = "Histogram of Total Steps", xlab="Steps", sub = newsubtitle)
 ```
 
-![plot of chunk unnamed-chunk-5](./PA1_template_files/figure-html/unnamed-chunk-5.png) 
+![plot of chunk unnamed-chunk-6](./PA1_template_files/figure-html/unnamed-chunk-6.png) 
 
 There is no difference in the mean values in the cleaned dataset from the original. They were both 10766 There is a slight difference in the median values of 1.19. The original median was 10765 and the cleaned median was 10766.19 
 
@@ -233,6 +242,6 @@ xyplot(steps~interval|weekend, weekAMmean,layout = c(1, 2),ylab="Number of Steps
         })
 ```
 
-![plot of chunk unnamed-chunk-6](./PA1_template_files/figure-html/unnamed-chunk-6.png) 
+![plot of chunk unnamed-chunk-7](./PA1_template_files/figure-html/unnamed-chunk-7.png) 
 
 The graph shows slight differences between weekend and weekday activity, with weekend showing a higher mean number of steps.
